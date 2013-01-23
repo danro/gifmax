@@ -29,7 +29,6 @@ exports.index = function(req, res){
   // load by specific id
   if (req.params.id) {
     requestToken(function (nextToken) {
-      console.log(nextToken);
       requestPath(req.params.id, function (path) {
         res.render('index', { title: title, img: path, token: '', link: nextToken });
       });
