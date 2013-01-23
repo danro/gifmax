@@ -7,11 +7,13 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , stylus = require('stylus')
+  , jade = require('jade')
   , nib = require('nib')
 ;
 
 var app = express();
 
+// import nib into .styl compiles
 function compile(str, path) {
   return stylus(str)
     .set('filename', path)
@@ -19,6 +21,21 @@ function compile(str, path) {
     .use(nib())
     .import('nib');
 }
+
+// import nib into jade:stylus filter
+jade.filters.stylus = function (str, options){
+  var ret;
+  str = str.replace(/\\n/g, '\n');
+  stylus(str, options)
+    .set('compress', true)
+    .use(nib())
+    .import('nib')
+    .render(function(err, css){
+      if (err) throw err;
+      ret = css.replace(/\n/g, '\\n');
+  });
+  return '<style type="text/css">' + ret + '</style>';
+};
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
