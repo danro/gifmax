@@ -31,7 +31,6 @@ app.configure(function(){
   app.use(app.router);
   app.use(stylus.middleware({ src: __dirname + '/public' , compile: compile }));
   app.use(express.static(path.join(__dirname, 'public')));
-  app.use(nib());
 });
 
 app.configure('development', function(){
