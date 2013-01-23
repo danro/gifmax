@@ -1,6 +1,6 @@
 {
-  "name": "hello-jitsu",
-  "subdomain": "hello-jitsu-danro",
+  "name": "gifmax",
+  "subdomain": "gifmax",
   "scripts": {
     "start": "app.js"
   },
