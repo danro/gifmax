@@ -1,0 +1,15 @@
+extends layout
+
+block styles
+  :stylus
+    .img
+      background-image: url('#{img}')
+        
+block scripts
+  script
+    var t = '#{token}';
+    if (t && history.replaceState) history.replaceState(null, null, t);
+
+block content
+  a(href=link)
+    .img
