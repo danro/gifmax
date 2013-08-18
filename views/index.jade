@@ -6,6 +6,7 @@ block styles
       background-image: url('#{img}')
         
 block scripts
+  script(src='/javascripts/main.js')
   script
     var t = '#{token}';
     if (t && history.replaceState) history.replaceState(null, null, t);
