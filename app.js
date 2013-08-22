@@ -6,9 +6,17 @@ var express = require('express')
   , routes = require('./routes')
   , http = require('http')
   , path = require('path')
+  , fs = require('fs')
   , stylus = require('stylus')
   , jade = require('jade')
   , nib = require('nib')
+  , request = require('request')
+;
+
+// helpers
+var basePath = path.resolve(__dirname, './')
+  , root = function (p) { return path.join(basePath, p); }
+  , pkjs = JSON.parse(fs.readFileSync(root('package.json')))
 ;
 
 var app = express();
@@ -58,4 +66,11 @@ app.get('/:id?', routes.index);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
+  ping();
 });
+
+function ping() {
+  setTimeout(function () {
+    request(pkjs.homepage, ping);
+  }, 1800000); // 30 mins
+}

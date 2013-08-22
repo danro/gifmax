@@ -1,10 +1,11 @@
 {
   "name": "gifmax",
   "subdomain": "gifmax",
+  "homepage": "http://gifmax.herokuapp.com",
   "scripts": {
     "start": "app.js"
   },
-  "version": "0.2.1",
+  "version": "0.2.2",
   "engines": {
     "node": "0.8.x"
   },
