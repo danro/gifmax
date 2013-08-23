@@ -24,7 +24,7 @@
   // Mobile Safari in standalone mode
   // https://gist.github.com/kylebarrow/1042026
   if (("standalone" in window.navigator) && window.navigator.standalone) {
-    link.ontouchstart = function () {
+    link.ontouchstart = function (event) {
       event.preventDefault();
       document.location.href = href;
     };
