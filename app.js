@@ -51,8 +51,8 @@ app.configure(function(){
   app.set('view engine', 'jade');
   app.use(express.favicon(__dirname + '/public/images/favicon.gif'));
   app.use(express.logger('dev'));
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
+  app.use(express.json());
+  app.use(express.urlencoded());
   app.use(app.router);
   app.use(stylus.middleware({ src: __dirname + '/public' , compile: compile }));
   app.use(express.static(path.join(__dirname, 'public')));
