@@ -14,7 +14,7 @@ var express = require('express')
 ;
 
 // helpers
-var basePath = path.resolve(__dirname, './')
+var basePath = path.resolve(__dirname, '../')
   , root = function (p) { return path.join(basePath, p); }
   , pkjs = JSON.parse(fs.readFileSync(root('package.json')))
 ;
@@ -47,15 +47,14 @@ jade.filters.stylus = function (str, options){
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
-  app.set('views', __dirname + '/views');
+  app.set('views', basePath + '/views');
   app.set('view engine', 'jade');
-  app.use(express.favicon(__dirname + '/public/images/favicon.gif'));
-  app.use(express.logger('dev'));
+  app.use(express.favicon(basePath + '/public/images/favicon.gif'));
   app.use(express.json());
   app.use(express.urlencoded());
   app.use(app.router);
-  app.use(stylus.middleware({ src: __dirname + '/public' , compile: compile }));
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(stylus.middleware({ src: basePath + '/public' , compile: compile }));
+  app.use(express.static(path.join(basePath, 'public')));
 });
 
 app.configure('development', function(){
@@ -66,11 +65,4 @@ app.get('/:id?', routes.index);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
-  ping();
 });
-
-function ping() {
-  setTimeout(function () {
-    request(pkjs.homepage, ping);
-  }, 1800000); // 30 mins
-}

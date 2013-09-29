@@ -4,4 +4,4 @@ I got tired of maxgif.com crashing my browser, so I wrote this.
 
 Enjoy!
 
-http://gifmax.herokuapp.com/
+http://gifmax.danro.net/
